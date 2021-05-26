@@ -1,0 +1,85 @@
+#检测数据
+88881201200111111111111111116666666600000268026802680268026802680268026811700501057005012020102011262020102011262020102011260000000000000000210304
+{
+    "data":{
+        "startFrame":"8888",
+        "data":{
+            "latitude":"05700501",
+            "sendTime":"202010201126",
+            "TSP":268,
+            "PM2.5":268,
+            "noise":268,
+            "temperature":268,
+            "PM10":268,
+            "humidity":268,
+            "startTime":"202010201126",
+            "windDirection":268,
+            "endTime":"202010201126",
+            "windSpeed":268,
+            "longitude":"11700501"
+        },
+        "dataType":"00",
+        "messageCode":"12012001",
+        "endFrame":"0304",
+        "deviceCode":"1111111111111111",
+        "check":false,
+        "token":"66666666"
+    },
+    "deviceId":"1111111111111111",
+    "success":true
+}
+
+#心跳数据
+88881201200111111111111111116666666601660304
+{
+    "data":{
+        "startFrame":"8888",
+        "dataType":"01",
+        "messageCode":"12012001",
+        "endFrame":"0304",
+        "deviceCode":"1111111111111111",
+        "check":false,
+        "token":"66666666"
+    },
+    "deviceId":"1111111111111111",
+    "success":true
+}
+
+#校时数据
+同心跳
+
+#监测心跳回复
+89891201200111111111111111110001330304
+{
+    "data":{
+        "dataReturnType":"00",
+        "startFrame":"8989",
+        "data":{
+            "dataSendStatus":"01"
+        },
+        "messageCode":"12012001",
+        "endFrame":"0304",
+        "deviceCode":"1111111111111111",
+        "check":true
+    },
+    "deviceId":"1111111111111111",
+    "success":true
+}
+
+#校时回复
+89891201200111111111111111110220201020172424170304
+{
+    "data":{
+        "dataReturnType":"02",
+        "startFrame":"8989",
+        "data":{
+            "currentTime":"20201020172424"
+        },
+        "messageCode":"12012001",
+        "endFrame":"0304",
+        "deviceCode":"1111111111111111",
+        "check":true
+    },
+    "deviceId":"1111111111111111",
+    "success":true
+}

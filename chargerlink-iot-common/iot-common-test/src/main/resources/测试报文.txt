@@ -1,0 +1,257 @@
+#注册
+aa550200000063806214893d00013afc004445564943455f434841524745525f434c5f5841393238363938343934383437000000003839383630343034313931383830303731323436cc
+{
+	"data": {
+		"deviceType": 2,
+		"startFrame": "AA55",
+		"sequence": 64570,
+		"data": {
+			"deviceType": "DEVICE_CHARGER_CL_XA",
+			"hardwareId": "89860404191880071246",
+			"registerCode": "928698494847"
+		},
+		"commandCode": "00",
+		"check": true,
+		"deviceId": "006380621489",
+		"version": 1
+	},
+	"deviceId": "006380621489",
+	"success": true
+}
+
+#登录
+aa55020000751017844304450001096a014445564943455f434841524745525f434c5f58410000006393600143240338393836303433393130313838303236323136360101020c030000002d031707680008
+{
+	"data": {
+		"deviceType": 2,
+		"startFrame": "AA55",
+		"sequence": 27145,
+		"data": {
+			"deviceType": "DEVICE_CHARGER_CL_XA",
+			"loginReason": 2,
+			"serialNumber": 6393600143,
+			"downloadProtocolType": 0,
+			"simId": "89860439101880262166",
+			"versionCode2": 3,
+			"connectorCount": 12,
+			"versionCode1": 36,
+			"networkType": 1,
+			"network": 1,
+			"deviceStatus": 3
+		},
+		"commandCode": "01",
+		"check": true,
+		"deviceId": "751017844304",
+		"version": 1
+	},
+	"deviceId": "751017844304",
+	"success": true
+}
+
+#刷卡
+aa550200007809541023042500015b5002
+06 00 00 61303034303439383900000000000000 0000000000000000 01 64000000 1c
+{
+	"data": {
+		"deviceType": 2,
+		"startFrame": "AA55",
+		"sequence": 979,
+		"data": {
+			"password": "",
+			"connectorId": 10,
+			"cardType": 1,
+			"operateType": 0,
+			"chargeType": 0,
+			"userId": "a00310025",
+			"chargeParams": 0
+		},
+		"commandCode": "02",
+		"check": true,
+		"deviceId": "953175188304",
+		"version": 1
+	},
+	"deviceId": "953175188304",
+	"success": true
+}
+
+#启动充电回复
+aa55080000544029142313080001b81c03010000d9
+
+#结束充电回复
+aa55080000544029142313070001101c04010032
+
+#充电开始通知
+aa5502000053776264230439000184120508000137353138343935310000000000000000023c0000000000101901916555673b13985e000000002c0100002526050000000028
+{
+	"data": {
+		"deviceType": 2,
+		"startFrame": "AA55",
+		"sequence": 4740,
+		"data": {
+			"notifyType": 1,
+			"orderId": 10190191655567,
+			"startPower": 0,
+			"connectorId": 8,
+			"prePrice": 300,
+			"orderOrigin": 0,
+			"startTime": 1587024699,
+			"templateId": 337445,
+			"userId": "75184951",
+			"subsidyParams": 0,
+			"subsidyType": 0
+		},
+		"commandCode": "05",
+		"check": true,
+		"deviceId": "537762642304",
+		"version": 1
+	},
+	"deviceId": "537762642304",
+	"success": true
+}
+
+#充电结束通知
+aa5502000098464170830450000165f8060b0300003c052c01243138313730303938303139000000000000000000000000101901911638582f79965e2fce965e000000005c000000c800000047440800de0001000001c80068010000f6
+
+#遥测
+aa550200001702866673046000015be1071f540000ff030c0100000002000000030000000400000005000251e70323003500a60000000010190191559319060002ffe7086a0002000400000000101901916537500700000008000000090000000a0000000b0000000c00000011
+{
+	"data": {
+		"deviceType": 2,
+		"startFrame": "AA55",
+		"sequence": 57691,
+		"data": {
+			"environmentTemperature": 84,
+			"connectorCount": 12,
+			"connectorList": [
+				{
+					"connectorId": 1,
+					"temperature": 0,
+					"remainChargingTime": 0,
+					"status": 0
+				},
+				{
+					"connectorId": 2,
+					"temperature": 0,
+					"remainChargingTime": 0,
+					"status": 0
+				},
+				{
+					"connectorId": 3,
+					"temperature": 0,
+					"remainChargingTime": 0,
+					"status": 0
+				},
+				{
+					"connectorId": 4,
+					"temperature": 0,
+					"remainChargingTime": 0,
+					"status": 0
+				},
+				{
+					"chargerInfo": {
+						"current": 3,
+						"totalMeter": 53,
+						"totalPrice": 166,
+						"orderId": 10190191559319,
+						"power": 35,
+						"voltage": 231
+					},
+					"connectorId": 5,
+					"temperature": 0,
+					"remainChargingTime": 81,
+					"status": 2
+				},
+				{
+					"chargerInfo": {
+						"current": 8,
+						"totalMeter": 2,
+						"totalPrice": 4,
+						"orderId": 10190191653750,
+						"power": 106,
+						"voltage": 231
+					},
+					"connectorId": 6,
+					"temperature": 0,
+					"remainChargingTime": 255,
+					"status": 2
+				},
+				{
+					"connectorId": 7,
+					"temperature": 0,
+					"remainChargingTime": 0,
+					"status": 0
+				},
+				{
+					"connectorId": 8,
+					"temperature": 0,
+					"remainChargingTime": 0,
+					"status": 0
+				},
+				{
+					"connectorId": 9,
+					"temperature": 0,
+					"remainChargingTime": 0,
+					"status": 0
+				},
+				{
+					"connectorId": 10,
+					"temperature": 0,
+					"remainChargingTime": 0,
+					"status": 0
+				},
+				{
+					"connectorId": 11,
+					"temperature": 0,
+					"remainChargingTime": 0,
+					"status": 0
+				},
+				{
+					"connectorId": 12,
+					"temperature": 0,
+					"remainChargingTime": 0,
+					"status": 0
+				}
+			],
+			"signal": 31,
+			"kberrCnt": "0000FF03"
+		},
+		"commandCode": "07",
+		"check": true,
+		"deviceId": "170286667304",
+		"version": 1
+	},
+	"deviceId": "170286667304",
+	"success": true
+}
+
+#注册回复
+aa550200000063806214890e00013cfc000200000000000000003b
+{
+	"deviceType": 2,
+	"deviceId": "006380621489",
+	"length": 14,
+	"version": 1,
+	"sequence": 64572,
+	"commandCode": "00",
+	"data": {
+		"result": 2,
+		"deviceId": "00000000"
+	}
+}
+
+#登录回复
+aa550200004236656423040e0001bd3001003c2a985e3c00000087
+aa550200004236656423040e0001bd3001003c2a985e3c00000087
+{
+	"deviceType": 2,
+	"deviceId": "423665642304",
+	"length": 14,
+	"version": 1,
+	"sequence": 12477,
+	"commandCode": "01",
+	"data": {
+		"result": 0,
+		"systemTime": 1587030588,
+		"heartbeatInterval": 60
+	}
+}

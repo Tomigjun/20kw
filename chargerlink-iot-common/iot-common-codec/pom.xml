@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>chargerlink-iot-common</artifactId>
+		<groupId>com.chargerlink.iot</groupId>
+		<version>3.2.0</version>
+	</parent>
+	<version>${project.parent.version}</version>
+	<artifactId>iot-common-codec</artifactId>
+	
+	<dependencies>
+		<!--二方引用 start-->
+		<dependency>
+			<groupId>com.chargerlink</groupId>
+			<artifactId>chargerlink-common-util</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.chargerlink.iot</groupId>
+			<artifactId>iot-common-message</artifactId>
+		</dependency>
+		<!--二方引用 end-->
+		<!--三方引用start-->
+		<dependency>
+			<groupId>org.scodec</groupId>
+			<artifactId>scodec-core_2.12</artifactId>
+			<version>1.11.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.chargerlink.iot</groupId>
+			<artifactId>iot-common-message</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-autoconfigure</artifactId>
+			<optional>true</optional>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>net.alchim31.maven</groupId>
+				<artifactId>scala-maven-plugin</artifactId>
+				<version>3.1.6</version>
+				<executions>
+					<execution>
+						<id>scala-compile-first</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>add-source</goal>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>scala-test-compile</id>
+						<phase>process-test-resources</phase>
+						<goals>
+							<goal>testCompile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

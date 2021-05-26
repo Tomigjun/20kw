@@ -1,0 +1,37 @@
+@startuml
+
+abstract class AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+
+List <|- AbstractList
+Collection <|-- AbstractCollection
+
+Collection <|- List
+AbstractCollection <|- AbstractList
+AbstractList <|..... ArrayList
+
+class ArrayList {
+Object[] elementData
++void size()<<12312>>
+}
+
+enum TimeUnit {
+DAYS
+HOURS
+MINUTES
+}
+
+
+class China{
+    .. /' 省略号 '/
+    -String area;
+    ==/' 双分割线 '/
+    +int rivers;
+    ..注解..
+    #long person;
+}
+note left:左侧注明用途
+
+@enduml

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.chargerlink</groupId>
+        <artifactId>chargerlink-parent-boot</artifactId>
+        <version>1.6.6.RELEASE</version>
+    </parent>
+
+    <groupId>com.chargerlink.iot</groupId>
+    <artifactId>chargerlink-iot-common</artifactId>
+    <version>3.2.0</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>iot-common-message</module>
+        <module>iot-common-rocket</module>
+        <!--<module>iot-common-kafka</module>-->
+        <!--<module>iot-common-mqtt</module>-->
+        <!--<module>iot-common</module>-->
+        <module>iot-common-connector-tcp</module>
+        <module>iot-common-codec</module>
+        <module>iot-common-test</module>
+    </modules>
+
+    <properties>
+        <chargerlink-iot-common.version>3.2.0</chargerlink-iot-common.version>
+        <netty.version>4.1.25.Final</netty.version>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>chargerlink</id>
+            <distributionManagement>
+                <repository>
+                    <id>thirdparty</id>
+                    <url>http://nexus.mamcharge.com/repository/thirdparty/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+    </profiles>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.chargerlink.iot</groupId>
+                <artifactId>iot-common-message</artifactId>
+                <version>${chargerlink-iot-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.chargerlink.iot</groupId>
+                <artifactId>iot-common-rocket</artifactId>
+                <version>${chargerlink-iot-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.chargerlink.iot</groupId>
+                <artifactId>iot-common-connector-tcp</artifactId>
+                <version>${chargerlink-iot-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.chargerlink.iot</groupId>
+                <artifactId>iot-common-codec</artifactId>
+                <version>${chargerlink-iot-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

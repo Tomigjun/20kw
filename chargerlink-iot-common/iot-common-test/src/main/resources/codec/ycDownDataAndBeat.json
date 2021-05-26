@@ -1,0 +1,85 @@
+{
+  "description": "扬尘下行上传数据和心跳",
+  "version": 0.1,
+  "protocolId": "8989",
+  "firstNodeName": "startFrame",
+  "deviceIdNodeName": "deviceId",
+  "rules": {
+    "startFrame": {
+      "description":"表头",
+      "length": 2,
+      "analyticalUnit": "BYTE",
+      "nodeType": "FIELD",
+      "readOrder": "BIG_END",
+      "defaultValue": "8989",
+      "protocolDataType": "BCD",
+      "businessDataType": "STRING",
+      "nextNodeName": "messageCode"
+    },
+    "messageCode": {
+      "description": "消息编号",
+      "length": 4,
+      "analyticalUnit": "BYTE",
+      "nodeType": "FIELD",
+      "readOrder": "BIG_END",
+      "defaultValue": "12012001",
+      "protocolDataType": "BCD",
+      "businessDataType": "STRING",
+      "nextNodeName": "deviceCode"
+    },
+    "deviceCode": {
+      "description": "设备编号",
+      "length": 8,
+      "analyticalUnit": "BYTE",
+      "nodeType": "FIELD",
+      "readOrder": "BIG_END",
+      "defaultValue": "",
+      "protocolDataType": "BCD",
+      "businessDataType": "STRING",
+      "nextNodeName": "dataType"
+    },
+    "dataType": {
+      "description": "返回数据类型",
+      "length": 1,
+      "analyticalUnit": "BYTE",
+      "nodeType": "FIELD",
+      "readOrder": "BIG_END",
+      "defaultValue": "00",
+      "protocolDataType": "BCD",
+      "businessDataType": "STRING",
+      "nextNodeName": "transStatus"
+    },
+    "transStatus": {
+      "description": "返回传输状态",
+      "length": 1,
+      "analyticalUnit": "BYTE",
+      "nodeType": "FIELD",
+      "readOrder": "BIG_END",
+      "defaultValue": "00",
+      "protocolDataType": "BCD",
+      "businessDataType": "STRING",
+      "nextNodeName": "check"
+    },
+    "check": {
+      "description": "BCC校验",
+      "length": 1,
+      "analyticalUnit": "BYTE",
+      "nodeType": "CHECK",
+      "checkType": "BCC",
+      "checkStartIndex": 0,
+      "checkEndIndex": -1,
+      "checkIndex": -1,
+      "nextNodeName": "endFrame"
+    },
+    "endFrame": {
+      "description": "固定表尾",
+      "length": 2,
+      "analyticalUnit": "BYTE",
+      "nodeType": "FIELD",
+      "readOrder": "BIG_END",
+      "defaultValue": "0304",
+      "protocolDataType": "BCD",
+      "businessDataType": "STRING"
+    }
+  }
+}

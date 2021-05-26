@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.chargerlink.iot.common.rocket.producer.config.RocketProducerAutoConfiguration,\
+com.chargerlink.iot.common.rocket.consumer.config.RocketConsumerAutoConfiguration

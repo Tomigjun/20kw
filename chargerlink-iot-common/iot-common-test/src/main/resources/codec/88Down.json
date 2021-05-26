@@ -1,0 +1,128 @@
+{
+  "description": "扬尘噪声设备对接下行标准协议",
+  "protocolId": "18889",	    //当前规则链的协议ID
+  "version": "0.1",	        //协议版本号
+  "deviceIdNodeName": "deviceCode", //存放设备ID的节点名称
+  "firstNodeName": "startFrame",    //规则集合中第一个节点的名称
+  "rules": {              //规则集合
+    "startFrame": {
+      "description": "表头",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",       //解析单位
+      "length": 2,                    //解析长度
+      "readOrder": "BIG_END",	      //读取顺序
+      "protocolDataType": "HEX",     //协议数据类型
+      "businessDataType": "STRING",   //业务数据类型
+      "defaultValue": "8989",
+      "nextNodeName": "messageCode"
+    },
+    "messageCode": {
+      "description": "消息编号",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",       //解析单位
+      "length": 4,                    //解析长度
+      "readOrder": "BIG_END",	      //读取顺序
+      "protocolDataType": "HEX",     //协议数据类型
+      "businessDataType": "STRING",   //业务数据类型
+      "nextNodeName": "deviceCode"
+    },
+    "deviceCode": {
+      "description": "设备编号",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",       //解析单位
+      "length": 8,                    //解析长度
+      "readOrder": "BIG_END",	      //读取顺序
+      "protocolDataType": "BCD",     //协议数据类型
+      "businessDataType": "STRING",   //业务数据类型
+      "nextNodeName": "dataType"
+    },
+    "dataType": {
+      "description": "数据类型",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",       //解析单位
+      "length": 1,                    //解析长度
+      "readOrder": "BIG_END",	      //读取顺序
+      "protocolDataType": "BCD",     //协议数据类型
+      "businessDataType": "STRING",   //业务数据类型
+      "nextNodeName": "data"
+    },
+    "data": {
+      "description": "内容域",
+      "nodeType": "MAP",
+      "analyticalUnit": "BYTE",       //解析单位
+      "keySourceNodeName": "dataType",
+      "ruleLinks": {//规则链集合
+        "00": {
+          "description": "检测数据响应",
+          "firstNodeName": "dataSendStatus",
+          "rules": {
+            "dataSendStatus": {
+              "description": "数据传输状态",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE", //解析单位
+              "length": 1, //解析长度
+              "readOrder": "BIG_END", //读取顺序
+              "protocolDataType": "BCD", //协议数据类型
+              "businessDataType": "STRING", //业务数据类型
+              "nextNodeName": "check"
+            }
+          }
+        },
+        "01": {
+          "description": "心跳数据响应",
+          "firstNodeName": "dataSendStatus",
+          "rules": {
+            "dataSendStatus": {
+              "description": "数据传输状态",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "BIG_END",
+              "protocolDataType": "BCD",
+              "businessDataType": "STRING",
+              "nextNodeName": "check"
+            }
+          }
+        },
+        "02": {
+          "description": "校时数据响应",
+          "description": "检测数据",
+          "firstNodeName": "currentTime",
+          "rules": {
+            "currentTime": {
+              "description": "当前服务器时间",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 7,
+              "readOrder": "BIG_END",
+              "protocolDataType": "BCD",
+              "businessDataType": "STRING"
+            }
+          }
+        }
+      },
+      "nextNodeName": "check"
+    },
+    "check": {
+      "description": "校验数据",
+      "nodeType": "CHECK",
+      "analyticalUnit": "BYTE",       //解析单位
+      "length": 1,                    //解析长度
+      "startIndex": null,             //(选填)校验位在报文中的起始解析位置
+      "checkType": "BCC",             //校验位的计算方式
+      "checkStartIndex": 0,           //校验位计算的起始位置
+      "checkEndIndex": -1,             //校验位计算的截至位置
+      "nextNodeName": "endFrame"
+    },
+    "endFrame": {
+      "description": "表尾",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",       //解析单位
+      "length": 2,                    //解析长度
+      "readOrder": "BIG_END",	      //读取顺序
+      "protocolDataType": "BCD",     //协议数据类型
+      "businessDataType": "STRING",   //业务数据类型
+      "defaultValue": "0304"	      //(选填)业务默认值
+    }
+  }
+}

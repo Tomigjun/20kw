@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.chargerlink.iot.common.codec.service.config.RuleLinkManager

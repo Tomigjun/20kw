@@ -1,0 +1,1168 @@
+{
+  "description": "X10",
+  "protocolId": "8888",	    //当前规则链的协议ID
+  "version": "1.0",	        //协议版本号
+  "deviceIdNodeName": "deviceId", //存放设备ID的节点名称
+  "firstNodeName": "startFrame",    //规则集合中第一个节点的名称
+  "rules": {              //规则集合
+    "startFrame": {
+      "description": "起始域",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",       //解析单位
+      "length": 2,                    //解析长度
+      "readOrder": "BIG_END",	      //读取顺序
+      "protocolDataType": "HEX",     //协议数据类型
+      "businessDataType": "STRING",   //业务数据类型
+      "defaultValue": "AA55",	      //(选填)业务默认值
+      "nextNodeName": "deviceType"
+    },
+    "deviceType": {
+      "description": "桩类型",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",       //解析单位
+      "length": 1,                    //解析长度
+      "readOrder": "LITTLE_END",	      //读取顺序
+      "protocolDataType": "BYTE",     //协议数据类型
+      "businessDataType": "INT",   //业务数据类型
+      "nextNodeName": "holding"
+    },
+    "holding": {
+      "description": "识别码冗余长度",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",       //解析单位
+      "length": 2,                    //解析长度
+      "readOrder": "LITTLE_END",	      //读取顺序
+      "protocolDataType": "HEX",     //协议数据类型
+      "businessDataType": "STRING",   //业务数据类型
+      "defaultValue": "0000",	      //(选填)业务默认值
+      "handle": "HOLDING",
+      "nextNodeName": "deviceId"
+    },
+    "deviceId": {
+      "description": "识别码",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",       //解析单位
+      "length": 6,                    //解析长度
+      "readOrder": "BIG_END",	      //读取顺序
+      "protocolDataType": "BCD",     //协议数据类型
+      "businessDataType": "STRING",   //业务数据类型
+      "nextNodeName": "length"
+    },
+    "length": {
+      "description": "长度",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",       //解析单位
+      "length": 2,                    //解析长度
+      "readOrder": "LITTLE_END",	      //读取顺序
+      "protocolDataType": "BYTE",     //协议数据类型
+      "businessDataType": "INT",   //业务数据类型
+      "handle": "HOLDING",
+      "nextNodeName": "version"
+    },
+    "version": {
+      "description": "版本域",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",       //解析单位
+      "length": 1,                    //解析长度
+      "readOrder": "LITTLE_END",	      //读取顺序
+      "protocolDataType": "BYTE",     //协议数据类型
+      "businessDataType": "INT",   //业务数据类型
+      "nextNodeName": "sequence"
+    },
+    "sequence": {
+      "description": "序列号",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",       //解析单位
+      "length": 2,                    //解析长度
+      "readOrder": "LITTLE_END",	      //读取顺序
+      "protocolDataType": "BYTE",     //协议数据类型
+      "businessDataType": "INT",   //业务数据类型
+      "nextNodeName": "commandCode"
+    },
+    "commandCode": {
+      "description": "命令码",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",       //解析单位
+      "length": 1,                    //解析长度
+      "readOrder": "LITTLE_END",	      //读取顺序
+      "protocolDataType": "HEX",     //协议数据类型
+      "businessDataType": "STRING",   //业务数据类型
+      "nextNodeName": "data"
+    },
+    "data": {
+      "description": "内容域",
+      "nodeType": "MAP",
+      "analyticalUnit": "BYTE",       //解析单位
+      "keySourceNodeName": "commandCode",
+      "ruleLinks": {              //规则链集合
+        "00": {
+          "description": "设备注册",
+          "firstNodeName": "deviceType",    //规则集合中第一个节点的名称
+          "rules": {              //规则集合
+            "deviceType": {
+              "description": "设备型号",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 20,                    //解析长度
+              "readOrder": "BIG_END",	      //读取顺序
+              "protocolDataType": "ASCII",     //协议数据类型
+              "businessDataType": "STRING",   //业务数据类型
+              "nextNodeName": "registerCode"
+            },
+            "registerCode": {
+              "description": "注册码",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 16,                    //解析长度
+              "readOrder": "BIG_END",	      //读取顺序
+              "protocolDataType": "ASCII",     //协议数据类型
+              "businessDataType": "STRING",   //业务数据类型
+              "nextNodeName": "hardwareId"
+            },
+            "hardwareId": {
+              "description": "硬件ID",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 20,                    //解析长度
+              "readOrder": "BIG_END",	      //读取顺序
+              "protocolDataType": "ASCII",     //协议数据类型
+              "businessDataType": "STRING",   //业务数据类型
+              "handle": "OPTIONAL"
+            }
+          }
+        },
+        "01": {
+          "description": "设备登录",
+          "firstNodeName": "deviceType",    //规则集合中第一个节点的名称
+          "rules": {              //规则集合
+            "deviceType": {
+              "description": "设备型号",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 20,                    //解析长度
+              "readOrder": "BIG_END",	      //读取顺序
+              "protocolDataType": "ASCII",     //协议数据类型
+              "businessDataType": "STRING",   //业务数据类型
+              "nextNodeName": "serialNumber"
+            },
+            "serialNumber": {
+              "description": "设备编号",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 8,                    //解析长度
+              "readOrder": "BIG_END",	      //读取顺序
+              "protocolDataType": "BCD",     //协议数据类型
+              "businessDataType": "LONG",   //业务数据类型
+              "nextNodeName": "versionCode1"
+            },
+            "versionCode1": {
+              "description": "固件1版本号",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "defaultValue": "",	      //(选填)业务默认值
+              "adjustment": 0,            //(选填)调整量
+              "nextNodeName": "versionCode2"
+            },
+            "versionCode2": {
+              "description": "固件2版本号",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "defaultValue": "",	      //(选填)业务默认值
+              "adjustment": 0,            //(选填)调整量
+              "nextNodeName": "simId"
+            },
+            "simId": {
+              "description": "SIM卡卡号",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 20,                    //解析长度
+              "readOrder": "BIG_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "STRING",   //业务数据类型
+              "nextNodeName": "network"
+            },
+            "network": {
+              "description": "上网方式",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "nextNodeName": "networkType"
+            },
+            "networkType": {
+              "description": "网络模块类型",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "nextNodeName": "loginReason"
+            },
+            "loginReason": {
+              "description": "登录原因",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "defaultValue": "",	      //(选填)业务默认值
+              "adjustment": 0,            //(选填)调整量
+              "nextNodeName": "connectorCount"
+            },
+            "connectorCount": {
+              "description": "充电接口数量",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "nextNodeName": "deviceStatus"
+            },
+            "deviceStatus": {
+              "description": "设备状态",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "nextNodeName": "statisticInfo"
+            },
+            "statisticInfo": {
+              "description": "统计信息",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 8,                    //解析长度
+              "readOrder": "BIG_END",	      //读取顺序
+              "protocolDataType": "BCD",     //协议数据类型
+              "businessDataType": "STRING",   //业务数据类型
+              "handle": "HOLDING",
+              "nextNodeName": "downloadProtocolType"
+            },
+            "downloadProtocolType": {
+              "description": "文件下载协议",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT"   //业务数据类型
+            }
+          }
+        },
+        "02": {
+          "description": "刷卡鉴权",
+          "firstNodeName": "connectorId",    //规则集合中第一个节点的名称
+          "rules": {              //规则集合
+            "connectorId": {
+              "description": "枪头序号",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "nextNodeName": "cardType"
+            },
+            "cardType": {
+              "description": "卡片类型",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "nextNodeName": "operateType"
+            },
+            "operateType": {
+              "description": "操作类型",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "nextNodeName": "userId"
+            },
+            "userId": {
+              "description": "用户账号",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 16,                    //解析长度
+              "readOrder": "BIG_END",	      //读取顺序
+              "protocolDataType": "ASCII",     //协议数据类型
+              "businessDataType": "STRING",   //业务数据类型
+              "nextNodeName": "password"
+            },
+            "password": {
+              "description": "用户密码",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 8,                    //解析长度
+              "readOrder": "BIG_END",	      //读取顺序
+              "protocolDataType": "ASCII",     //协议数据类型
+              "businessDataType": "STRING",   //业务数据类型
+              "nextNodeName": "chargeType"
+            },
+            "chargeType": {
+              "description": "充电模式",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "nextNodeName": "chargeParams"
+            },
+            "chargeParams": {
+              "description": "充电参数",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 4,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "defaultValue": "",	      //(选填)业务默认值
+              "adjustment": 0            //(选填)调整量
+            }
+          }
+        },
+        "03": {
+          "description": "启动充电回复",
+          "firstNodeName": "connectorId",    //规则集合中第一个节点的名称
+          "rules": {              //规则集合
+            "connectorId": {
+              "description": "枪头号",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "BIG_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "defaultValue": "",	      //(选填)业务默认值
+              "adjustment": 0,            //(选填)调整量
+              "nextNodeName": "result"
+            },
+            "result": {
+              "description": "结果",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "BIG_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "defaultValue": "",	      //(选填)业务默认值
+              "adjustment": 0,            //(选填)调整量
+              "nextNodeName": "failReason"
+            },
+            "failReason": {
+              "description": "失败原因",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "BIG_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "defaultValue": "",	      //(选填)业务默认值
+              "adjustment": 0            //(选填)调整量
+            }
+          }
+        },
+        "04": {
+          "description": "结束充电回复",
+          "firstNodeName": "connectorId",    //规则集合中第一个节点的名称
+          "rules": {              //规则集合
+            "connectorId": {
+              "description": "枪头号",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "BIG_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "defaultValue": "",	      //(选填)业务默认值
+              "adjustment": 0,            //(选填)调整量
+              "nextNodeName": "stopReason"
+            },
+            "stopReason": {
+              "description": "结果",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "BIG_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "defaultValue": "",	      //(选填)业务默认值
+              "adjustment": 0            //(选填)调整量
+            }
+          }
+        },
+        "05": {
+          "description": "充电开始通知",
+          "firstNodeName": "connectorId",    //规则集合中第一个节点的名称
+          "rules": {              //规则集合
+            "connectorId": {
+              "description": "枪头号",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "nextNodeName": "orderOrigin"
+            },
+            "orderOrigin": {
+              "description": "订单来源",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "nextNodeName": "notifyType"
+            },
+            "notifyType": {
+              "description": "通知类型",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "nextNodeName": "userId"
+            },
+            "userId": {
+              "description": "用户账号",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 10,                    //解析长度
+              "readOrder": "BIG_END",	      //读取顺序
+              "protocolDataType": "ASCII",     //协议数据类型
+              "businessDataType": "STRING",   //业务数据类型
+              "nextNodeName": "holding"
+            },
+            "holding": {
+              "description": "用户账号冗余",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 10,                    //解析长度
+              "readOrder": "BIG_END",	      //读取顺序
+              "protocolDataType": "ASCII",     //协议数据类型
+              "businessDataType": "STRING",   //业务数据类型
+              "handle": "HOLDING",
+              "nextNodeName": "orderId"
+            },
+            "orderId": {
+              "description": "订单号",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 10,                    //解析长度
+              "readOrder": "BIG_END",	      //读取顺序
+              "protocolDataType": "BCD",     //协议数据类型
+              "businessDataType": "LONG",   //业务数据类型
+              "nextNodeName": "startTime"
+            },
+            "startTime": {
+              "description": "开始充电时间",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 4,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "LONG",   //业务数据类型
+              "nextNodeName": "startPower"
+            },
+            "startPower": {
+              "description": "开始充电电量",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 4,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "LONG",   //业务数据类型
+              "nextNodeName": "prePrice"
+            },
+            "prePrice": {
+              "description": "预消费金额",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 4,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "LONG",   //业务数据类型
+              "nextNodeName": "templateId"
+            },
+            "templateId": {
+              "description": "计费模板ID",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 4,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "LONG",   //业务数据类型
+              "nextNodeName": "subsidyType"
+            },
+            "subsidyType": {
+              "description": "补贴模式",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "nextNodeName": "subsidyParams"
+            },
+            "subsidyParams": {
+              "description": "补贴参数",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 2,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT"   //业务数据类型
+            }
+          }
+        },
+        "06": {
+          "description": "充电结束通知",
+          "firstNodeName": "connectorId",    //规则集合中第一个节点的名称
+          "rules": {              //规则集合
+            "connectorId": {
+              "description": "枪头号",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "defaultValue": "",	      //(选填)业务默认值
+              "adjustment": 0,            //(选填)调整量
+              "nextNodeName": "orderOrigin"
+            },
+            "orderOrigin": {
+              "description": "订单来源",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "defaultValue": "",	      //(选填)业务默认值
+              "adjustment": 0,            //(选填)调整量
+              "nextNodeName": "stopReason"
+            },
+            "stopReason": {
+              "description": "订单结束原因",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "defaultValue": "",	      //(选填)业务默认值
+              "adjustment": 0,            //(选填)调整量
+              "nextNodeName": "externalInfo"
+            },
+            "externalInfo": {
+              "description": "嵌入式内部字段",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 6,                    //解析长度
+              "readOrder": "BIG_END",	      //读取顺序
+              "protocolDataType": "BCD",     //协议数据类型
+              "businessDataType": "STRING",   //业务数据类型
+              "look": "HOLDING",
+              "nextNodeName": "userId"
+            },
+            "userId": {
+              "description": "用户账号",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 10,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "STRING",   //业务数据类型
+              "defaultValue": "",	      //(选填)业务默认值
+              "adjustment": 0,            //(选填)调整量
+              "nextNodeName": "userId-hold"
+            },
+            "userId-hold": {
+              "description": "冗余",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 10,                    //解析长度
+              "readOrder": "BIG_END",	      //读取顺序
+              "protocolDataType": "BCD",     //协议数据类型
+              "businessDataType": "STRING",   //业务数据类型
+              "look": "HOLDING",
+              "nextNodeName": "orderId"
+            },
+            "orderId": {
+              "description": "订单号",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 10,                    //解析长度
+              "readOrder": "BIG_END",	      //读取顺序
+              "protocolDataType": "BCD",     //协议数据类型
+              "businessDataType": "LONG",   //业务数据类型
+              "defaultValue": "",	      //(选填)业务默认值
+              "adjustment": 0,            //(选填)调整量
+              "nextNodeName": "startTime"
+            },
+            "startTime": {
+              "description": "充电开始时间",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 4,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "LONG",   //业务数据类型
+              "defaultValue": "",	      //(选填)业务默认值
+              "adjustment": 0,            //(选填)调整量
+              "nextNodeName": "stopTime"
+            },
+            "stopTime": {
+              "description": "充电结束时间",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 4,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "LONG",   //业务数据类型
+              "defaultValue": "",	      //(选填)业务默认值
+              "adjustment": 0,            //(选填)调整量
+              "nextNodeName": "startMeter"
+            },
+            "startMeter": {
+              "description": "开始充电电量",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 4,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "LONG",   //业务数据类型
+              "defaultValue": "",	      //(选填)业务默认值
+              "adjustment": 0,            //(选填)调整量
+              "nextNodeName": "stopMeter"
+            },
+            "stopMeter": {
+              "description": "结束充电电量",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 4,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "LONG",   //业务数据类型
+              "defaultValue": "",	      //(选填)业务默认值
+              "adjustment": 0,            //(选填)调整量
+              "nextNodeName": "orderPrice"
+            },
+            "orderPrice": {
+              "description": "订单费用",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 4,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "defaultValue": "",	      //(选填)业务默认值
+              "adjustment": 0,            //(选填)调整量
+              "nextNodeName": "templateId"
+            },
+            "templateId": {
+              "description": "计费模板ID",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 4,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "defaultValue": "",	      //(选填)业务默认值
+              "adjustment": 0,            //(选填)调整量
+              "nextNodeName": "orderPower"
+            },
+            "orderPower": {
+              "description": "计费功率",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 2,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "defaultValue": "",	      //(选填)业务默认值
+              "adjustment": 0,            //(选填)调整量
+              "nextNodeName": "subsidyType"
+            },
+            "subsidyType": {
+              "description": "补贴模式",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "defaultValue": "",	      //(选填)业务默认值
+              "adjustment": 0,            //(选填)调整量
+              "nextNodeName": "subsidyParams"
+            },
+            "subsidyParams": {
+              "description": "补贴参数",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 2,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "defaultValue": "",	      //(选填)业务默认值
+              "adjustment": 0,            //(选填)调整量
+              "nextNodeName": "chargeType"
+            },
+            "chargeType": {
+              "description": "充电模式",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "defaultValue": "",	      //(选填)业务默认值
+              "adjustment": 0,            //(选填)调整量
+              "nextNodeName": "chargeParams"
+            },
+            "chargeParams": {
+              "description": "充电参数",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 2,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "defaultValue": "",	      //(选填)业务默认值
+              "adjustment": 0,            //(选填)调整量
+              "nextNodeName": "realChargeTime"
+            },
+            "realChargeTime": {
+              "description": "实际充电时间",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 4,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "LONG",   //业务数据类型
+              "defaultValue": "",	      //(选填)业务默认值
+              "adjustment": 0            //(选填)调整量
+            }
+
+          }
+        },
+        "07": {
+          "description": "遥测消息",
+          "firstNodeName": "signal",    //规则集合中第一个节点的名称
+          "rules": {              //规则集合
+            "signal": {
+              "description": "SIM卡信号",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "nextNodeName": "environmentTemperature"
+            },
+            "environmentTemperature": {
+              "description": "环境温度",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "nextNodeName": "kberrCnt"
+            },
+            "kberrCnt": {
+              "description": "嵌入式内部字段",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 4,                    //解析长度
+              "readOrder": "BIG_END",	      //读取顺序
+              "protocolDataType": "HEX",     //协议数据类型
+              "businessDataType": "STRING",   //业务数据类型
+              "look": "HOLDING",
+              "nextNodeName": "connectorCount"
+            },
+            "connectorCount": {
+              "description": "枪头数量",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "nextNodeName": "connectorList"
+            },
+            "connectorList": {
+              "description": "枪头信息",
+              "nodeType": "LIST",
+              "analyticalUnit": "BYTE",       //解析单位
+              "cycleSourceNodeName": "connectorCount",
+              "ruleLink": {       //列表节点的规则链
+                "firstNodeName": "connectorId",    //规则集合中第一个节点的名称
+                "rules": {              //规则集合
+                  "connectorId": {
+                    "description": "枪头编号",
+                    "nodeType": "FIELD",
+                    "analyticalUnit": "BYTE",       //解析单位
+                    "length": 1,                    //解析长度
+                    "readOrder": "LITTLE_END",	      //读取顺序
+                    "protocolDataType": "BYTE",     //协议数据类型
+                    "businessDataType": "INT",   //业务数据类型
+                    "nextNodeName": "temperature"
+                  },
+                  "temperature": {
+                    "description": "芯片温度",
+                    "nodeType": "FIELD",
+                    "analyticalUnit": "BYTE",       //解析单位
+                    "length": 1,                    //解析长度
+                    "readOrder": "LITTLE_END",	      //读取顺序
+                    "protocolDataType": "BYTE",     //协议数据类型
+                    "businessDataType": "INT",   //业务数据类型
+                    "nextNodeName": "status"
+                  },
+                  "status": {
+                    "description": "状态",
+                    "nodeType": "FIELD",
+                    "analyticalUnit": "BYTE",       //解析单位
+                    "length": 1,                    //解析长度
+                    "readOrder": "LITTLE_END",	      //读取顺序
+                    "protocolDataType": "BYTE",     //协议数据类型
+                    "businessDataType": "INT",   //业务数据类型
+                    "nextNodeName": "remainChargingTime"
+                  },
+                  "remainChargingTime": {
+                    "description": "故障代码/剩余充电时间",
+                    "nodeType": "FIELD",
+                    "analyticalUnit": "BYTE",       //解析单位
+                    "length": 1,                    //解析长度
+                    "readOrder": "LITTLE_END",	      //读取顺序
+                    "protocolDataType": "BYTE",     //协议数据类型
+                    "businessDataType": "INT",   //业务数据类型
+                    "nextNodeName": "chargerInfo"
+                  },
+                  "chargerInfo": {
+                    "description": "充电接口信息",
+                    "nodeType": "MAP",
+                    "analyticalUnit": "BYTE",       //解析单位
+                    "keySourceNodeName": "status",
+                    "ruleLinks": {              //规则链集合
+                      "1": {
+                        "description": "占用状态",
+                        "firstNodeName": "voltage",    //规则集合中第一个节点的名称
+                        "rules": {              //规则集合
+                          "voltage": {
+                            "description": "电压",
+                            "nodeType": "FIELD",
+                            "analyticalUnit": "BYTE",       //解析单位
+                            "length": 1,                    //解析长度
+                            "readOrder": "LITTLE_END",	      //读取顺序
+                            "protocolDataType": "BYTE",     //协议数据类型
+                            "businessDataType": "INT",   //业务数据类型
+                            "nextNodeName": "current"
+                          },
+                          "current": {
+                            "description": "电流",
+                            "nodeType": "FIELD",
+                            "analyticalUnit": "BYTE",       //解析单位
+                            "length": 1,                    //解析长度
+                            "readOrder": "LITTLE_END",	      //读取顺序
+                            "protocolDataType": "BYTE",     //协议数据类型
+                            "businessDataType": "INT",   //业务数据类型
+                            "nextNodeName": "power"
+                          },
+                          "power": {
+                            "description": "功率",
+                            "nodeType": "FIELD",
+                            "analyticalUnit": "BYTE",       //解析单位
+                            "length": 2,                    //解析长度
+                            "readOrder": "LITTLE_END",	      //读取顺序
+                            "protocolDataType": "BYTE",     //协议数据类型
+                            "businessDataType": "INT",   //业务数据类型
+                            "nextNodeName": "totalMeter"
+                          },
+                          "totalMeter": {
+                            "description": "累计用电量",
+                            "nodeType": "FIELD",
+                            "analyticalUnit": "BYTE",       //解析单位
+                            "length": 2,                    //解析长度
+                            "readOrder": "LITTLE_END",	      //读取顺序
+                            "protocolDataType": "BYTE",     //协议数据类型
+                            "businessDataType": "INT",   //业务数据类型
+                            "nextNodeName": "totalPrice"
+                          },
+                          "totalPrice": {
+                            "description": "累计充电费用",
+                            "nodeType": "FIELD",
+                            "analyticalUnit": "BYTE",       //解析单位
+                            "length": 2,                    //解析长度
+                            "readOrder": "LITTLE_END",	      //读取顺序
+                            "protocolDataType": "BYTE",     //协议数据类型
+                            "businessDataType": "INT",   //业务数据类型
+                            "nextNodeName": "orderId"
+                          },
+                          "orderId": {
+                            "description": "订单号",
+                            "nodeType": "FIELD",
+                            "analyticalUnit": "BYTE",       //解析单位
+                            "length": 10,                    //解析长度
+                            "readOrder": "BIG_END",	      //读取顺序
+                            "protocolDataType": "BCD",     //协议数据类型
+                            "businessDataType": "LONG"   //业务数据类型
+                          }
+                        }
+                      },
+                      "2": {
+                        "description": "充电中",
+                        "firstNodeName": "voltage",    //规则集合中第一个节点的名称
+                        "rules": {              //规则集合
+                          "voltage": {
+                            "description": "电压",
+                            "nodeType": "FIELD",
+                            "analyticalUnit": "BYTE",       //解析单位
+                            "length": 1,                    //解析长度
+                            "readOrder": "LITTLE_END",	      //读取顺序
+                            "protocolDataType": "BYTE",     //协议数据类型
+                            "businessDataType": "INT",   //业务数据类型
+                            "nextNodeName": "current"
+                          },
+                          "current": {
+                            "description": "电流",
+                            "nodeType": "FIELD",
+                            "analyticalUnit": "BYTE",       //解析单位
+                            "length": 1,                    //解析长度
+                            "readOrder": "LITTLE_END",	      //读取顺序
+                            "protocolDataType": "BYTE",     //协议数据类型
+                            "businessDataType": "INT",   //业务数据类型
+                            "nextNodeName": "power"
+                          },
+                          "power": {
+                            "description": "功率",
+                            "nodeType": "FIELD",
+                            "analyticalUnit": "BYTE",       //解析单位
+                            "length": 2,                    //解析长度
+                            "readOrder": "LITTLE_END",	      //读取顺序
+                            "protocolDataType": "BYTE",     //协议数据类型
+                            "businessDataType": "INT",   //业务数据类型
+                            "nextNodeName": "totalMeter"
+                          },
+                          "totalMeter": {
+                            "description": "累计用电量",
+                            "nodeType": "FIELD",
+                            "analyticalUnit": "BYTE",       //解析单位
+                            "length": 2,                    //解析长度
+                            "readOrder": "LITTLE_END",	      //读取顺序
+                            "protocolDataType": "BYTE",     //协议数据类型
+                            "businessDataType": "INT",   //业务数据类型
+                            "nextNodeName": "totalPrice"
+                          },
+                          "totalPrice": {
+                            "description": "累计充电费用",
+                            "nodeType": "FIELD",
+                            "analyticalUnit": "BYTE",       //解析单位
+                            "length": 2,                    //解析长度
+                            "readOrder": "LITTLE_END",	      //读取顺序
+                            "protocolDataType": "BYTE",     //协议数据类型
+                            "businessDataType": "INT",   //业务数据类型
+                            "nextNodeName": "orderId"
+                          },
+                          "orderId": {
+                            "description": "订单号",
+                            "nodeType": "FIELD",
+                            "analyticalUnit": "BYTE",       //解析单位
+                            "length": 10,                    //解析长度
+                            "readOrder": "BIG_END",	      //读取顺序
+                            "protocolDataType": "BCD",     //协议数据类型
+                            "businessDataType": "LONG"   //业务数据类型
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "15": {
+          "description": "充电结束通知（汽车桩）",
+          "firstNodeName": "connectorId",    //规则集合中第一个节点的名称
+          "rules": {              //规则集合
+            "connectorId": {
+              "description": "枪头号",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "nextNodeName": "orderSource"
+            },
+            "orderSource": {
+              "description": "订单来源",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "nextNodeName": "orderStopReason"
+            },
+            "orderStopReason": {
+              "description": "订单结束原因",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "nextNodeName": "hold"
+            },
+            "hold": {
+              "description": "嵌入式内部字段",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 6,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "HEX",     //协议数据类型
+              "businessDataType": "STRING",   //业务数据类型
+              "handle": "HOLDING",
+              "nextNodeName": "userId"
+            },
+            "userId": {
+              "description": "用户账号",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 10,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "STRING",   //业务数据类型
+              "nextNodeName": "hold-userId"
+            },
+            "hold-userId": {
+              "description": "冗余",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 10,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "STRING",   //业务数据类型
+              "handle": "HOLDING",
+              "nextNodeName": "orderId"
+            },
+            "orderId": {
+              "description": "订单号",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 10,                    //解析长度
+              "readOrder": "BIG_END",	      //读取顺序
+              "protocolDataType": "BCD",     //协议数据类型
+              "businessDataType": "LONG",   //业务数据类型
+              "nextNodeName": "startTime"
+            },
+            "startTime": {
+              "description": "startTime",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 4,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "LONG",   //业务数据类型
+              "nextNodeName": "stopTime"
+            },
+            "stopTime": {
+              "description": "stopTime",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 4,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "LONG",   //业务数据类型
+              "nextNodeName": "startMeter"
+            },
+            "startMeter": {
+              "description": "startMeter",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 4,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "LONG",   //业务数据类型
+              "nextNodeName": "stopMeter"
+            },
+            "stopMeter": {
+              "description": "stopMeter",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 4,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "LONG",   //业务数据类型
+              "nextNodeName": "electricPrice"
+            },
+            "electricPrice": {
+              "description": "electricPrice",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 4,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "LONG",   //业务数据类型
+              "nextNodeName": "servicePrice"
+            },
+            "servicePrice": {
+              "description": "节点描述",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 4,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "LONG",   //业务数据类型
+              "nextNodeName": "templateId"
+            },
+            "templateId": {
+              "description": "templateId",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 4,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "LONG"   //业务数据类型
+            }
+          }
+        }
+      },
+      "nextNodeName": "check"
+    },
+    "check": {
+      "description": "校验和",
+      "nodeType": "CHECK",
+      "analyticalUnit": "BYTE",       //解析单位
+      "length": 1,                    //解析长度
+      "startIndex": null,             //(选填)校验位在报文中的起始解析位置
+      "checkType": "SUM",             //校验位的计算方式
+      "checkStartIndex": 13,           //校验位计算的起始位置
+      "checkEndIndex": -1             //校验位计算的截至位置
+    }
+  }
+}

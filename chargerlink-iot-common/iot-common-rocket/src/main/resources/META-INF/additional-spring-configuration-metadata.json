@@ -1,0 +1,86 @@
+{
+  "groups": [
+    {
+      "sourceType": "com.chargerlink.iot.common.rocket.producer.config.RocketProducerProperties",
+      "name": "iot.rocket.producer.topics",
+      "sourceMethod": "getTopics()",
+      "type": "java.util.List<com.chargerlink.iot.common.rocket.entity.RocketTopic>"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.chargerlink.iot.common.rocket.producer.config.RocketProducerProperties",
+      "name": "iot.rocket.producer.topics",
+      "description": "生产者使用的topic列表",
+      "type": "java.util.List<com.chargerlink.iot.common.rocket.entity.RocketTopic>"
+    },
+    {
+      "sourceType": "com.chargerlink.iot.common.rocket.entity.RocketTopic",
+      "name": "iot.rocket.producer.topics: \r\n - id",
+      "description": "ID",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.chargerlink.iot.common.rocket.entity.RocketTopic",
+      "name": "iot.rocket.producer.topics: \r\n - value",
+      "description": "topic值 <b>命名规则:ApplicationName-TopicType-MessageDirection</b>",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.chargerlink.iot.common.rocket.entity.RocketTopic",
+      "name": "iot.rocket.producer.topics: \r\n - description",
+      "description": "topic描述",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.chargerlink.iot.common.rocket.entity.RocketTopic",
+      "name": "iot.rocket.producer.topics: \r\n - group-name",
+      "description": "组名称，默认为父节点中的default-group-name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.chargerlink.iot.common.rocket.entity.RocketTopic",
+      "name": "iot.rocket.producer.topics: \r\n - tags",
+      "description": "默认为*(即topic下的所有消息)，可选值有${iot.node-id}或自定义",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.chargerlink.iot.common.rocket.producer.config.RocketProducerProperties",
+      "name": "iot.rocket.consumer.topics",
+      "description": "消费者使用的topic列表",
+      "type": "java.util.List<com.chargerlink.iot.common.rocket.entity.RocketTopic>"
+    },
+    {
+      "sourceType": "com.chargerlink.iot.common.rocket.entity.RocketTopic",
+      "name": "iot.rocket.consumer.topics: \r\n - id",
+      "description": "ID",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.chargerlink.iot.common.rocket.entity.RocketTopic",
+      "name": "iot.rocket.consumer.topics: \r\n - value",
+      "description": "topic值 <b>命名规则:ApplicationName-TopicType-MessageDirection</b>",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.chargerlink.iot.common.rocket.entity.RocketTopic",
+      "name": "iot.rocket.consumer.topics: \r\n - description",
+      "description": "topic描述",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.chargerlink.iot.common.rocket.entity.RocketTopic",
+      "name": "iot.rocket.consumer.topics: \r\n - group-name",
+      "description": "组名称，默认为父节点中的default-group-name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.chargerlink.iot.common.rocket.entity.RocketTopic",
+      "name": "iot.rocket.consumer.topics: \r\n - tags",
+      "description": "默认为*(即topic下的所有消息)，可选值有${iot.node-id}或自定义",
+      "type": "java.lang.String"
+    }
+  ],
+  "hints": [
+  ]
+}

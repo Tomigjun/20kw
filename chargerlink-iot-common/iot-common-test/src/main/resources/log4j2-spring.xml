@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--monitorinterval配置文件变化监听（1天），有变化自动重新加载-->
+<configuration status="ALL" monitorinterval="86400">
+    <Properties>
+        <!--${project.parent.name}从pom中取到项目名称作为日志名称-->
+        <property name="log.name">${project.name}</property>
+        <!--${hostName}取服务器名称或hosts地址-->
+        <property name="log.path">logs</property>
+        <!--%highlight{}支持高亮显示-->
+        <property name="log.pattern">%highlight{%d{yyyy-MM-dd HH:mm:ss SSS} [%t] %c(line-%L) - %m%n}</property>
+    </Properties>
+    <appenders>
+        <Console name="ConsoleAppender" target="SYSTEM_OUT">
+            <PatternLayout pattern="${log.pattern}"/>
+        </Console>
+        <RollingFile name="FileAppender"
+                     fileName="${log.path}/${log.name}.log"
+                     filePattern="${log.path}/$${date:yyyy-MM}/${log.name}-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="${log.pattern}"/>
+            <!--每个日志文件的大小，达到size后自动打包-->
+            <SizeBasedTriggeringPolicy size="5000 MB"/>
+            <!--每天最多有多少个压缩包，超过该值，自动删除当天最早的压缩包-->
+            <DefaultRolloverStrategy max="1000">
+                <!--日志删除策略，自动删除15天前的日志-->
+                <Delete basePath="${log.path}" maxDepth="2">
+                    <IfFileName glob="*/*.log.gz"/>
+                    <IfLastModified age="15d"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+    </appenders>
+    <loggers>
+        <root level="debug">
+            <appender-ref ref="ConsoleAppender"/>
+            <appender-ref ref="FileAppender"/>
+        </root>
+    </loggers>
+</configuration>

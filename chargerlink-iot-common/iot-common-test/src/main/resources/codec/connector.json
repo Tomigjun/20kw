@@ -1,0 +1,15 @@
+{
+  "8888": {
+    "description": "x10设备通讯协议",
+    "messageAnalyseType": "START_AND_LENGTH_FIELD",
+    "messageAnalyseParam": {
+      "maxFrameLength": 350,
+      "baseFrameLength": 13,
+      "lengthFieldOffset": 11,
+      "lengthFieldLength": 2,
+      "startFieldLength": 2,
+      "byteOrder":"LITTLE_ENDIAN",
+      "startFieldByteBuf": "AA55"
+    }
+  }
+}

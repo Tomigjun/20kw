@@ -1,0 +1,20 @@
+{
+  "groups": [
+    {
+      "sourceType": "com.chargerlink.iot.common.connector.config.TCPConnectorProperties",
+      "name": "iot.connector.protocol-config",
+      "sourceMethod": "getProtocolConfig()",
+      "type": "com.chargerlink.iot.common.connector.config.TCPConnectorProperties$ProtocolConfig"
+    },
+    {
+      "sourceType": "com.chargerlink.iot.common.connector.config.TCPConnectorProperties",
+      "name": "iot.connector.netty-config",
+      "sourceMethod": "getNettyConfig()",
+      "type": "com.chargerlink.iot.common.connector.config.TCPConnectorProperties$NettyConfig"
+    }
+  ],
+  "properties": [
+  ],
+  "hints": [
+  ]
+}

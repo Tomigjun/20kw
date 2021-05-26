@@ -1,0 +1,180 @@
+{
+  "description": "X10",
+  "protocolId": "8889", //当前规则链的协议ID
+  "version": "1.0", //协议版本号
+  "deviceIdNodeName": "deviceId", //存放设备ID的节点名称
+  "firstNodeName": "startFrame",  //规则集合中第一个节点的名称
+  "rules": {  //规则集合
+    "startFrame": {
+      "description": "起始域",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",       //解析单位
+      "length": 2,                    //解析长度
+      "readOrder": "BIG_END",	      //读取顺序
+      "protocolDataType": "HEX",     //协议数据类型
+      "businessDataType": "STRING",   //业务数据类型
+      "defaultValue": "AA55",	      //(选填)业务默认值
+      "look": "HOLDING",
+      "nextNodeName": "deviceType"
+    },
+    "deviceType": {
+      "description": "桩类型",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",       //解析单位
+      "length": 1,                    //解析长度
+      "readOrder": "LITTLE_END",	      //读取顺序
+      "protocolDataType": "BYTE",     //协议数据类型
+      "businessDataType": "INT",   //业务数据类型
+      "nextNodeName": "holding"
+    },
+    "holding": {
+      "description": "识别码冗余长度",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",       //解析单位
+      "length": 2,                    //解析长度
+      "readOrder": "BIG_END",	      //读取顺序
+      "protocolDataType": "HEX",     //协议数据类型
+      "businessDataType": "STRING",   //业务数据类型
+      "defaultValue": "0000",	      //(选填)业务默认值
+      "look": "HOLDING",
+      "nextNodeName": "deviceId"
+    },
+    "deviceId": {
+      "description": "识别码",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",       //解析单位
+      "length": 6,                    //解析长度
+      "readOrder": "BIG_END",	      //读取顺序
+      "protocolDataType": "BCD",     //协议数据类型
+      "businessDataType": "STRING",   //业务数据类型
+      "nextNodeName": "length"
+    },
+    "length": {
+      "description": "长度",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",       //解析单位
+      "length": 2,                    //解析长度
+      "readOrder": "LITTLE_END",	      //读取顺序
+      "protocolDataType": "BYTE",     //协议数据类型
+      "businessDataType": "INT",   //业务数据类型
+      "defaultValue": "",	      //(选填)业务默认值
+      "adjustment": 0,            //(选填)调整量
+      "nextNodeName": "version"
+    },
+    "version": {
+      "description": "版本域",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",       //解析单位
+      "length": 1,                    //解析长度
+      "readOrder": "LITTLE_END",	      //读取顺序
+      "protocolDataType": "BYTE",     //协议数据类型
+      "businessDataType": "INT",   //业务数据类型
+      "defaultValue": "",	      //(选填)业务默认值
+      "adjustment": 0,            //(选填)调整量
+      "nextNodeName": "sequence"
+    },
+    "sequence": {
+      "description": "序列号",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",       //解析单位
+      "length": 2,                    //解析长度
+      "readOrder": "LITTLE_END",	      //读取顺序
+      "protocolDataType": "BYTE",     //协议数据类型
+      "businessDataType": "INT",   //业务数据类型
+      "defaultValue": "",	      //(选填)业务默认值
+      "adjustment": 0,            //(选填)调整量
+      "nextNodeName": "commandCode"
+    },
+    "commandCode": {
+      "description": "命令码",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",       //解析单位
+      "length": 1,                    //解析长度
+      "readOrder": "LITTLE_END",	      //读取顺序
+      "protocolDataType": "BCD",     //协议数据类型
+      "businessDataType": "STRING",   //业务数据类型
+      "defaultValue": "",	      //(选填)业务默认值
+      "adjustment": 0,            //(选填)调整量
+      "nextNodeName": "data"
+    },
+    "data": {
+      "description": "数据域",
+      "nodeType": "MAP",
+      "analyticalUnit": "BYTE",       //解析单位
+      "keySourceNodeName": "commandCode",
+      "ruleLinks": {              //规则链集合
+        "00":{
+          "description": "注册回复",
+          "firstNodeName": "result",    //规则集合中第一个节点的名称
+          "rules": {              //规则集合
+            "result": {
+              "description": "结果",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "nextNodeName": "deviceId"
+            },
+            "deviceId": {
+              "description": "设备ID",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 8,                    //解析长度
+              "readOrder": "BIG_END",	      //读取顺序
+              "protocolDataType": "BCD",     //协议数据类型
+              "businessDataType": "STRING"   //业务数据类型
+            }
+          }
+        },
+        "01": {
+          "description": "登录",
+          "firstNodeName": "result",    //规则集合中第一个节点的名称
+          "rules": {              //规则集合
+            "result": {
+              "description": "结果",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 1,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "nextNodeName": "systemTime"
+            },
+            "systemTime": {
+              "description": "系统时间",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 4,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT",   //业务数据类型
+              "nextNodeName": "heartbeatInterval"
+            },
+            "heartbeatInterval": {
+              "description": "心跳间隔",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",       //解析单位
+              "length": 4,                    //解析长度
+              "readOrder": "LITTLE_END",	      //读取顺序
+              "protocolDataType": "BYTE",     //协议数据类型
+              "businessDataType": "INT"   //业务数据类型
+            }
+          }
+        }
+      },
+      "nextNodeName": "check"
+    },
+    "check": {
+      "description": "校验和",
+      "nodeType": "CHECK",
+      "analyticalUnit": "BYTE",       //解析单位
+      "length": 1,                    //解析长度
+      "startIndex": null,             //(选填)校验位在报文中的起始解析位置
+      "checkType": "SUM",             //校验位的计算方式
+      "checkStartIndex": 13,           //校验位计算的起始位置
+      "checkEndIndex": -1             //校验位计算的截至位置
+    }
+  }
+}

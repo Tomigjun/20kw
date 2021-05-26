@@ -1,0 +1,781 @@
+{
+  "description": "易电创新上行协议",
+  "protocolId": "332833",
+  "version": "0.1",
+  "deviceIdNodeName": "deviceId",
+  "firstNodeName": "startFrame",
+  "rules": {
+    "startFrame": {
+      "description": "起始域",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",
+      "length": 1,
+      "readOrder": "LITTLE_END",
+      "protocolDataType": "BCD",
+      "businessDataType": "STRING",
+      "defaultValue": "68",
+      "nextNodeName": "length1"
+    },
+    "length1": {
+      "description": "数据长度",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",
+      "length": 2,
+      "readOrder": "LITTLE_END",
+      "protocolDataType": "BYTE",
+      "businessDataType": "LONG",
+      "nextNodeName": "length2"
+    },
+    "length2": {
+      "description": "数据长度",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",
+      "length": 2,
+      "readOrder": "LITTLE_END",
+      "protocolDataType": "BYTE",
+      "businessDataType": "LONG",
+      "nextNodeName": "startFrameEnd"
+    },
+    "startFrameEnd": {
+      "description": "起始域结束位",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",
+      "length": 1,
+      "readOrder": "LITTLE_END",
+      "protocolDataType": "BCD",
+      "businessDataType": "STRING",
+      "defaultValue": "68",
+      "nextNodeName": "DIR"
+    },
+    "DIR": {
+      "description": "传输方向位",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BIT",
+      "length": 1,
+      "readOrder": "LITTLE_END",
+      "protocolDataType": "BYTE",
+      "businessDataType": "INT",
+      "nextNodeName": "PRM"
+    },
+    "PRM": {
+      "description": "启动标志位",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BIT",
+      "length": 1,
+      "readOrder": "LITTLE_END",
+      "protocolDataType": "BYTE",
+      "businessDataType": "INT",
+      "nextNodeName": "SEC"
+    },
+    "SEC": {
+      "description": "加密标志位",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BIT",
+      "length": 1,
+      "readOrder": "LITTLE_END",
+      "protocolDataType": "BYTE",
+      "businessDataType": "INT",
+      "nextNodeName": "reservedBit"
+    },
+    "reservedBit": {
+      "description": "保留位",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BIT",
+      "length": 1,
+      "readOrder": "LITTLE_END",
+      "protocolDataType": "BYTE",
+      "businessDataType": "INT",
+      "nextNodeName": "functionCode"
+    },
+    "functionCode": {
+      "description": "功能码",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BIT",
+      "length": 4,
+      "readOrder": "LITTLE_END",
+      "protocolDataType": "BYTE",
+      "businessDataType": "INT",
+      "nextNodeName": "adCode"
+    },
+    "adCode": {
+      "description": "行政区划码",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",
+      "length": 2,
+      "readOrder": "LITTLE_END",
+      "protocolDataType": "BCD",
+      "businessDataType": "STRING",
+      "nextNodeName": "terminalAddr"
+    },
+    "terminalAddr": {
+      "description": "终端地址",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",
+      "length": 2,
+      "readOrder": "LITTLE_END",
+      "protocolDataType": "BYTE",
+      "businessDataType": "INT",
+      "nextNodeName": "mainStationAddr"
+    },
+    "mainStationAddr": {
+      "description": "主站地址",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",
+      "length": 1,
+      "readOrder": "LITTLE_END",
+      "protocolDataType": "BYTE",
+      "businessDataType": "INT",
+      "nextNodeName": "AFN"
+    },
+    "AFN": {
+      "description": "应用层功能码",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",
+      "length": 1,
+      "readOrder": "LITTLE_END",
+      "protocolDataType": "HEX",
+      "businessDataType": "STRING",
+      "nextNodeName": "FIN"
+    },
+    "FIN": {
+      "description": "末帧标志",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BIT",
+      "length": 1,
+      "readOrder": "LITTLE_END",
+      "protocolDataType": "BYTE",
+      "businessDataType": "INT",
+      "nextNodeName": "SEQ"
+    },
+    "SEQ": {
+      "description": "帧序列",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BIT",
+      "length": 7,
+      "readOrder": "LITTLE_END",
+      "protocolDataType": "BCD",
+      "businessDataType": "INT",
+      "nextNodeName": "deviceCode"
+    },
+    "deviceCode": {
+      "description": "桩编号",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",
+      "length": 8,
+      "readOrder": "LITTLE_END",
+      "protocolDataType": "BCD",
+      "businessDataType": "LONG",
+      "nextNodeName": "functionNum"
+    },
+    "functionNum": {
+      "description": "AFN内功能号",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",
+      "length": 1,
+      "readOrder": "LITTLE_END",
+      "protocolDataType": "BYTE",
+      "businessDataType": "INT",
+      "nextNodeName": "dataMap"
+    },
+    "dataMap": {
+      "description": "数据内容",
+      "nodeType": "MAP",
+      "analyticalUnit": "BYTE",
+      "keySourceNodeName": [
+        "AFN",
+        "functionNum"
+      ],
+      "ruleLinks": {
+        "02-1": {
+          "description": "设备登录",
+          "firstNodeName": "deviceTime",
+          "rules": {
+            "deviceTime": {
+              "description": "设备当前时间",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 6,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BCD",
+              "businessDataType": "STRING"
+            }
+          }
+        },
+        "02-2": {
+          "description": "设备心跳",
+          "firstNodeName": "deviceTime",
+          "rules": {
+            "deviceTime": {
+              "description": "设备当前时间",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 6,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BCD",
+              "businessDataType": "STRING"
+            }
+          }
+        },
+        "04-1": {
+          "description": "设置主站通信地址",
+          "firstNodeName": "ipAddr1",
+          "rules": {
+            "ipAddr1": {
+              "description": "IP地址1段",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "ipAddr2"
+            },
+            "ipAddr2": {
+              "description": "IP地址2段",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "ipAddr3"
+            },
+            "ipAddr3": {
+              "description": "IP地址3段",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "ipAddr4"
+            },
+            "ipAddr4": {
+              "description": "IP地址4段",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "port"
+            },
+            "port": {
+              "description": "端口地址",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 2,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "backupIp1-1"
+            },
+            "backupIp1-1": {
+              "description": "IP地址1段备用1",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "backupIp1-2"
+            },
+            "backupIp1-2": {
+              "description": "IP地址2段备用1",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "backupIp1-3"
+            },
+            "backupIp1-3": {
+              "description": "IP地址3段备用1",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "backupIp1-4"
+            },
+            "backupIp1-4": {
+              "description": "IP地址4段备用1",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "backupPort1"
+            },
+            "backupPort1": {
+              "description": "端口地址",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 2,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "backupIp2-1"
+            },
+            "backupIp2-1": {
+              "description": "IP地址1段备用2",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "backupIp2-2"
+            },
+            "backupIp2-2": {
+              "description": "IP地址2段备用2",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "backupIp2-3"
+            },
+            "backupIp2-3": {
+              "description": "IP地址3段备用2",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "backupIp2-4"
+            },
+            "backupIp2-4": {
+              "description": "IP地址4段备用2",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "backupPort2"
+            },
+            "backupPort2": {
+              "description": "端口地址",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 2,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "APN"
+            },
+            "APN": {
+              "description": "APN",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 16,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "ASCII",
+              "businessDataType": "STRING"
+            }
+          }
+        },
+        "04-2": {
+          "description": "设置加密方案",
+          "firstNodeName": "encodeSolution",
+          "rules": {
+            "encodeSolution": {
+              "description": "加密方案",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT"
+            }
+          }
+        },
+        "04-3": {
+          "description": "设置充电数据上送间隔",
+          "firstNodeName": "dataSendGap",
+          "rules": {
+            "dataSendGap": {
+              "description": "数据上送间隔",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT"
+            }
+          }
+        },
+        "05-1": {
+          "description": "开启充电",
+          "firstNodeName": "chargeModel",
+          "rules": {
+            "chargeModel": {
+              "description": "充电模式",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "chargeTime"
+            },
+            "chargeTime": {
+              "description": "数据内容",
+              "nodeType": "MAP",
+              "analyticalUnit": "BYTE",
+              "keySourceNodeName": "chargeModel",
+              "ruleLinks": {
+                "0": {
+                  "description": "充电时间",
+                  "firstNodeName": "chargeTime",
+                  "rules": {
+                    "chargeTime": {
+                      "description": "充电时间",
+                      "nodeType": "FIELD",
+                      "analyticalUnit": "BYTE",
+                      "length": 4,
+                      "readOrder": "LITTLE_END",
+                      "protocolDataType": "HEX",
+                      "businessDataType": "STRING",
+                      "handle": "HOLDING",
+                      "defaultValue": "ffffffff"
+                    }
+                  }
+                },
+                "1": {
+                  "firstNodeName": "chargeTime",
+                  "rules": {
+                    "chargeTime": {
+                      "description": "充电时间",
+                      "nodeType": "FIELD",
+                      "analyticalUnit": "BYTE",
+                      "length": 4,
+                      "readOrder": "LITTLE_END",
+                      "protocolDataType": "BYTE",
+                      "businessDataType": "LONG"
+                    }
+                  }
+                },
+                "2": {
+                  "firstNodeName": "chargeTime",
+                  "rules": {
+                    "chargeTime": {
+                      "description": "充电时间",
+                      "nodeType": "FIELD",
+                      "analyticalUnit": "BYTE",
+                      "length": 4,
+                      "readOrder": "LITTLE_END",
+                      "protocolDataType": "BYTE",
+                      "businessDataType": "LONG"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "05-2": {
+          "description": "停止充电",
+          "firstNodeName": "blank",
+          "rules": {
+            "blank": {
+              "description": "无数据",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "STRING",
+              "handle": "SKIPING"
+            }
+          }
+        },
+        "05-3": {
+          "description": "设备重启",
+          "firstNodeName": "blank",
+          "rules": {
+            "blank": {
+              "description": "无数据",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "STRING",
+              "handle": "SKIPING"
+            }
+          }
+        },
+        "05-4": {
+          "description": "设备调整功率",
+          "firstNodeName": "gear",
+          "rules": {
+            "gear": {
+              "description": "档位",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "backup"
+            },
+            "backup": {
+              "description": "备用",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 4,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "STRING"
+            }
+          }
+        },
+        "0A-1": {
+          "description": "查询主站通信地址",
+          "firstNodeName": "blank",
+          "rules": {
+            "blank": {
+              "description": "无数据",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "STRING",
+              "handle": "SKIPING"
+            }
+          }
+        },
+        "0A-2": {
+          "description": "查询加密方案",
+          "firstNodeName": "blank",
+          "rules": {
+            "blank": {
+              "description": "无数据",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "STRING",
+              "handle": "SKIPING"
+            }
+          }
+        },
+        "0A-3": {
+          "description": "查询充电上送数据间隔",
+          "firstNodeName": "blank",
+          "rules": {
+            "blank": {
+              "description": "无数据",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "STRING",
+              "handle": "SKIPING"
+            }
+          }
+        },
+        "0A-4": {
+          "description": "查询终端版本",
+          "firstNodeName": "blank",
+          "rules": {
+            "blank": {
+              "description": "无数据",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "STRING",
+              "handle": "SKIPING"
+            }
+          }
+        },
+        "0A-5": {
+          "description": "查询终端其他信息",
+          "firstNodeName": "blank",
+          "rules": {
+            "blank": {
+              "description": "无数据",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "STRING",
+              "handle": "SKIPING"
+            }
+          }
+        },
+        "0C-1": {
+          "description": "读充电实时数据",
+          "firstNodeName": "blank",
+          "rules": {
+            "blank": {
+              "description": "无数据",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "STRING",
+              "handle": "SKIPING"
+            }
+          }
+        },
+        "0C-2": {
+          "description": "读充电枪状态",
+          "firstNodeName": "blank",
+          "rules": {
+            "blank": {
+              "description": "无数据",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "STRING",
+              "handle": "SKIPING"
+            }
+          }
+        },
+        "0E-1": {
+          "description": "设备时间变更",
+          "firstNodeName": "blank",
+          "rules": {
+            "blank": {
+              "description": "无数据",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "STRING",
+              "handle": "SKIPING"
+            }
+          }
+        },
+        "0E-2": {
+          "description": "设备故障",
+          "firstNodeName": "blank",
+          "rules": {
+            "blank": {
+              "description": "无数据",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "STRING",
+              "handle": "SKIPING"
+            }
+          }
+        },
+        "0F-2": {
+          "description": "查询未接收到的报文",
+          "firstNodeName": "blank",
+          "rules": {
+            "blank": {
+              "description": "无数据",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "STRING",
+              "handle": "SKIPING"
+            }
+          }
+        },
+        "0F-1": {
+          "description": "升级下发",
+          "firstNodeName": "updatePoint",
+          "rules": {
+            "updatePoint": {
+              "description": "升级功能",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 1,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "msgTotalCount"
+            },
+            "msgTotalCount": {
+              "description": "总报文条数",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 6,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "LONG",
+              "nextNodeName": "currentMsgSeq"
+            },
+            "currentMsgSeq": {
+              "description": "当前报文序号",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 6,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "LONG",
+              "nextNodeName": "currentMsgByteLength"
+            },
+            "currentMsgByteLength": {
+              "description": "当前报文字节长度",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 6,
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "BYTE",
+              "businessDataType": "LONG",
+              "nextNodeName": "currentMsgByte"
+            },
+            "currentMsgByte": {
+              "description": "当前报文字节",
+              "nodeType": "FIELD",
+              "analyticalUnit": "BYTE",
+              "length": 6,
+              "varLength": "currentMsgByteLength",
+              "readOrder": "LITTLE_END",
+              "protocolDataType": "HEX",
+              "businessDataType": "STRING"
+            }
+          }
+        }
+      },
+      "nextNodeName": "check"
+    },
+    "check": {
+      "description": "校验位",
+      "nodeType": "CHECK",
+      "analyticalUnit": "BYTE",
+      "length": 1,
+      "startIndex": null,
+      "checkType": "SUM",
+      "checkStartIndex": 6,
+      "checkEndIndex": -1,
+      "nextNodeName": "endFrame"
+    },
+    "endFrame": {
+      "description": "表尾",
+      "nodeType": "FIELD",
+      "analyticalUnit": "BYTE",
+      "length": 1,
+      "readOrder": "BIG_END",
+      "protocolDataType": "BCD",
+      "businessDataType": "STRING",
+      "defaultValue": "16"
+    }
+  }
+}

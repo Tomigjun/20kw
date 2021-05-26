@@ -1,0 +1,45 @@
+server:
+  port: 9999
+
+spring:
+  application:
+      name: ${iot.project-name}-connector
+
+iot:
+  project-name: ZhongChuang
+  codec:
+    config:
+      rule-path:
+      - classpath:codec/88Up.json
+      - classpath:codec/88Down.json
+  #connector配置
+  connector:
+    enable: true
+    netty-config:
+      server-port: 8921
+    protocol-config:
+      protocol-id: 8888
+      location: classpath:codec/connector.json
+  rocket:
+    #Rocket consumer配置
+    consumer:
+      enable: false
+      name-server-address: 127.0.0.1:9876
+      default-group-name: ${iot.project-name}-cn-gt
+      topics:
+      - id: 101
+        value: AnYang-gt-cv-u
+        group-name: AnYang-gt-cv-uu
+        description: "接收下行消息"
+    #Rocket producer配置
+    producer:
+      enable: true
+      name-server-address: 127.0.0.1:9876
+      default-group-name: ${iot.project-name}-cn-gt
+      topics:
+      - id: 100
+        value: ${iot.rocket.producer.default-group-name}-d
+        group-name: ${iot.rocket.producer.default-group-name}
+        tags: auto
+        description: "发送上行消息"
+

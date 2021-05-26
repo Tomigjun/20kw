@@ -1,0 +1,949 @@
+{
+  "description": "a10",
+  "version": 100,
+  "protocolId": "8889",
+  "firstNode": "startFrame",
+  "deviceIdNodeName": "deviceId",
+  "ruleLink": {
+    "startFrame": {
+      "description": "起始域",
+      "length": 2,
+      "analyticalType": "BYTE",
+      "noteType": "FIELD",
+      "byteOrdering": "BIG_END",
+      "defaultValue": "AA55",
+      "protocolDataType": "BCD",
+      "businessDataType": "STRING",
+      "nextNodeName": "typeCode"
+    },
+    "typeCode": {
+      "description": "桩类型",
+      "length": 1,
+      "analyticalType": "BYTE",
+      "noteType": "FIELD",
+      "byteOrdering": "LITTLE_END",
+      "defaultValue": 0,
+      "protocolDataType": "BYTE",
+      "businessDataType": "INT",
+      "nextNodeName": "assistCode"
+    },
+    "assistCode": {
+      "description": "辅助码",
+      "length": 2,
+      "analyticalType": "BYTE",
+      "noteType": "FIELD",
+      "byteOrdering": "BIG_END",
+      "defaultValue": "",
+      "protocolDataType": "BCD",
+      "businessDataType": "STRING",
+      "nextNodeName": "deviceId"
+    },
+    "deviceId": {
+      "description": "设备id",
+      "length": 6,
+      "analyticalType": "BYTE",
+      "noteType": "FIELD",
+      "byteOrdering": "BIG_END",
+      "defaultValue": "",
+      "protocolDataType": "BCD",
+      "businessDataType": "STRING",
+      "nextNodeName": "length"
+    },
+    "length": {
+      "description": "数据长度",
+      "length": 2,
+      "analyticalType": "BYTE",
+      "noteType": "FIELD",
+      "byteOrdering": "LITTLE_END",
+      "defaultValue": 0,
+      "protocolDataType": "BYTE",
+      "businessDataType": "INT",
+      "nextNodeName": "version"
+    },
+    "version": {
+      "description": "版本域",
+      "length": 1,
+      "analyticalType": "BYTE",
+      "noteType": "FIELD",
+      "byteOrdering": "LITTLE_END",
+      "defaultValue": 1,
+      "protocolDataType": "BYTE",
+      "businessDataType": "INT",
+      "nextNodeName": "sequence"
+    },
+    "sequence": {
+      "description": "序列号",
+      "length": 2,
+      "analyticalType": "BYTE",
+      "noteType": "FIELD",
+      "byteOrdering": "LITTLE_END",
+      "defaultValue": 0,
+      "protocolDataType": "BYTE",
+      "businessDataType": "INT",
+      "nextNodeName": "commandCode"
+    },
+    "commandCode": {
+      "description": "功能码",
+      "length": 1,
+      "analyticalType": "BYTE",
+      "noteType": "FIELD",
+      "byteOrdering": "BIG_END",
+      "defaultValue": "",
+      "protocolDataType": "BCD",
+      "businessDataType": "STRING",
+      "nextNodeName": "dataMap"
+    },
+    "dataMap": {
+      "description": "数据域",
+      "nodeName": "dataMap",
+      "analyticalType": "BYTE",
+      "noteType": "MAP",
+      "nextNodeName": "check",
+      "sourceFieldNames": [
+        "commandCode"
+      ],
+      "sourceEnum": {
+        "00": {
+          "description": "设备注册",
+          "firstNode": "resultCode",
+          "ruleLink": {
+            "resultCode": {
+              "description": "结果",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "assistCode"
+            },
+            "assistCode": {
+              "description": "辅助码",
+              "length": 2,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": "",
+              "protocolDataType": "ASCII",
+              "businessDataType": "STRING",
+              "nextNodeName": "serialNumber"
+            },
+            "serialNumber": {
+              "description": "设备id",
+              "length": 6,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "BIG_END",
+              "defaultValue": "",
+              "protocolDataType": "BCD",
+              "businessDataType": "STRING"
+            }
+          }
+        },
+        "01": {
+          "description": "设备登录",
+          "firstNode": "resultCode",
+          "ruleLink": {
+            "resultCode": {
+              "description": "结果",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "time"
+            },
+            "time": {
+              "description": "时间",
+              "length": 4,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": "",
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "heartbeatInterval"
+            },
+            "heartbeatInterval": {
+              "description": "心跳时间",
+              "length": 4,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": "",
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT"
+            }
+          }
+        },
+        "02": {
+          "description": "刷卡鉴权",
+          "firstNode": "connectorId",
+          "ruleLink": {
+            "connectorId": {
+              "description": "充电枪口",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "authStatus"
+            },
+            "authStatus": {
+              "description": "鉴权结果",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "cardType"
+            },
+            "cardType": {
+              "description": "卡片类型",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "BIG_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "assistCode"
+            },
+            "assistCode": {
+              "description": "辅助码",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "remainCount"
+            },
+            "remainCount": {
+              "description": "账户余额或次数",
+              "length": 4,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "orderId"
+            },
+            "orderId": {
+              "description": "订单id",
+              "length": 10,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "BIG_END",
+              "defaultValue": "",
+              "protocolDataType": "BCD",
+              "businessDataType": "STRING",
+              "nextNodeName": "assistCode2"
+            },
+            "assistCode2": {
+              "description": "预留",
+              "length": 5,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "BIG_END",
+              "defaultValue": "",
+              "protocolDataType": "BCD",
+              "businessDataType": "STRING"
+            }
+          }
+        },
+        "03": {
+          "description": "远程启动充电",
+          "firstNode": "connectorId",
+          "ruleLink": {
+            "connectorId": {
+              "description": "充电枪口",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "orderSource"
+            },
+            "orderSource": {
+              "description": "订单来源",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "account"
+            },
+            "account": {
+              "description": "用户账号",
+              "length": 16,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "BIG_END",
+              "defaultValue": 0,
+              "protocolDataType": "ASCII",
+              "businessDataType": "STRING",
+              "nextNodeName": "accountType"
+            },
+            "accountType": {
+              "description": "账号属性",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "assistCode"
+            },
+            "assistCode": {
+              "description": "预留",
+              "length": 3,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": "",
+              "protocolDataType": "BYTE",
+              "businessDataType": "STRING",
+              "nextNodeName": "remainCount"
+            },
+            "remainCount": {
+              "description": "账户余额或次数",
+              "length": 4,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "orderId"
+            },
+            "orderId": {
+              "description": "订单id",
+              "length": 10,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "BIG_END",
+              "defaultValue": "",
+              "protocolDataType": "BCD",
+              "businessDataType": "STRING",
+              "nextNodeName": "chargeMode"
+            },
+            "chargeMode": {
+              "description": "充电模式",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "BIG_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "chargerArgs"
+            },
+            "chargerArgs": {
+              "description": "充电参数",
+              "length": 4,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT"
+            }
+          }
+        },
+        "04": {
+          "description": "远程结束充电",
+          "firstNode": "connectorId",
+          "ruleLink": {
+            "connectorId": {
+              "description": "充电枪口",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "stopReason"
+            },
+            "stopReason": {
+              "description": "结束原因",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "assistCode"
+            },
+            "assistCode": {
+              "description": "预留",
+              "length": 2,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "BIG_END",
+              "defaultValue": "",
+              "protocolDataType": "ASCII",
+              "businessDataType": "STRING",
+              "nextNodeName": "orderId"
+            },
+            "orderId": {
+              "description": "订单id",
+              "length": 10,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "BIG_END",
+              "defaultValue": "",
+              "protocolDataType": "BCD",
+              "businessDataType": "STRING"
+            }
+          }
+        },
+        "05": {
+          "description": "充电开始通知",
+          "firstNode": "connectorId",
+          "ruleLink": {
+            "connectorId": {
+              "description": "充电枪口",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "resultCode"
+            },
+            "resultCode": {
+              "description": "结果",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "orderId"
+            },
+            "orderId": {
+              "description": "订单id",
+              "length": 10,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "BIG_END",
+              "defaultValue": "",
+              "protocolDataType": "BCD",
+              "businessDataType": "STRING"
+            }
+          }
+        },
+        "15": {
+          "description": "充电结束通知",
+          "firstNode": "connectorId",
+          "ruleLink": {
+            "connectorId": {
+              "description": "充电枪口",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "resultCode"
+            },
+            "resultCode": {
+              "description": "结果",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT"
+            }
+          }
+        },
+        "14": {
+          "description": "遥测消息",
+          "firstNode": "systemTime",
+          "ruleLink": {
+            "systemTime": {
+              "description": "系统时间",
+              "length": 4,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "LONG",
+              "nextNodeName": "resultCode"
+            },
+            "resultCode": {
+              "description": "结果",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT"
+            }
+          }
+        },
+        "08": {
+          "description": "计费模板下发",
+          "firstNode": "connectorId",
+          "ruleLink": {
+            "connectorId": {
+              "description": "充电枪口",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "tariffId"
+            },
+            "tariffId": {
+              "description": "计费模版编号",
+              "length": 4,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "tariffMode"
+            },
+            "tariffMode": {
+              "description": "计费模式",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "BIG_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "tariffTypeCount"
+            },
+            "tariffTypeCount": {
+              "description": "计费类型数目",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "assistCode"
+            },
+            "assistCode": {
+              "description": "预留",
+              "length": 4,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": "",
+              "protocolDataType": "BYTE",
+              "businessDataType": "STRING",
+              "nextNodeName": "chargeFeeType"
+            },
+            "chargeFeeType": {
+              "description": "充电电费类型",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "chargeFeeMap"
+            },
+            "chargeFeeMap": {
+              "description": "充电电费",
+              "nodeName": "chargeFeeMap",
+              "analyticalType": "BYTE",
+              "noteType": "MAP",
+              "nextNodeName": "serviceFeeType",
+              "sourceFieldNames": [
+                "chargeFeeType"
+              ],
+              "sourceEnum": {
+                "0": {
+                  "description": "不收取",
+                  "firstNode": "unitChargeRate",
+                  "ruleLink": {
+                    "unitChargeRate": {
+                      "description": "统一费率",
+                      "length": 2,
+                      "analyticalType": "BYTE",
+                      "noteType": "FIELD",
+                      "byteOrdering": "LITTLE_END",
+                      "defaultValue": 0,
+                      "protocolDataType": "BYTE",
+                      "businessDataType": "INT"
+                    }
+                  }
+                },
+                "2": {
+                  "description": "按统一电价收费",
+                  "firstNode": "unitChargeRate",
+                  "ruleLink": {
+                    "unitChargeRate": {
+                      "description": "统一费率",
+                      "length": 2,
+                      "analyticalType": "BYTE",
+                      "noteType": "FIELD",
+                      "byteOrdering": "LITTLE_END",
+                      "defaultValue": 0,
+                      "protocolDataType": "BYTE",
+                      "businessDataType": "INT"
+                    }
+                  }
+                },
+                "1": {
+                  "description": "按尖峰平谷电价收费",
+                  "firstNode": "chargeRateCount",
+                  "ruleLink": {
+                    "chargeRateCount": {
+                      "description": "时段数",
+                      "length": 1,
+                      "analyticalType": "BYTE",
+                      "noteType": "FIELD",
+                      "byteOrdering": "LITTLE_END",
+                      "defaultValue": 0,
+                      "protocolDataType": "BYTE",
+                      "businessDataType": "INT",
+                      "nextNodeName": "chargeRateList"
+                    },
+                    "chargeRateList": {
+                      "description": "分时段计费信息",
+                      "analyticalType": "BYTE",
+                      "noteType": "LIST",
+                      "sourceFieldName": "chargeRateCount",
+                      "itemJson": {
+                        "firstNode": "timeName",
+                        "ruleLink": {
+                          "timeName": {
+                            "description": "时段名称",
+                            "length": 1,
+                            "analyticalType": "BYTE",
+                            "noteType": "FIELD",
+                            "byteOrdering": "LITTLE_END",
+                            "defaultValue": 0,
+                            "protocolDataType": "BYTE",
+                            "businessDataType": "INT",
+                            "nextNodeName": "startTime"
+                          },
+                          "startTime": {
+                            "description": "起始时间",
+                            "length": 1,
+                            "analyticalType": "BYTE",
+                            "noteType": "FIELD",
+                            "byteOrdering": "LITTLE_END",
+                            "defaultValue": 0,
+                            "protocolDataType": "BYTE",
+                            "businessDataType": "INT",
+                            "nextNodeName": "stopTime"
+                          },
+                          "stopTime": {
+                            "description": "结束时间",
+                            "length": 1,
+                            "analyticalType": "BYTE",
+                            "noteType": "FIELD",
+                            "byteOrdering": "LITTLE_END",
+                            "defaultValue": 0,
+                            "protocolDataType": "BYTE",
+                            "businessDataType": "INT",
+                            "nextNodeName": "rate"
+                          },
+                          "rate": {
+                            "description": "时段费率",
+                            "length": 2,
+                            "analyticalType": "BYTE",
+                            "noteType": "FIELD",
+                            "byteOrdering": "LITTLE_END",
+                            "defaultValue": 0,
+                            "protocolDataType": "BYTE",
+                            "businessDataType": "INT"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "serviceFeeType": {
+              "description": "充电服务费类型",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "serviceFeeMap"
+            },
+            "serviceFeeMap": {
+              "description": "充电服务费",
+              "nodeName": "chargeFeeMap",
+              "analyticalType": "BYTE",
+              "noteType": "MAP",
+              "sourceFieldNames": [
+                "serviceFeeType"
+              ],
+              "sourceEnum": {
+                "0": {
+                  "description": "不收取",
+                  "firstNode": "unitServiceRate",
+                  "ruleLink": {
+                    "unitServiceRate": {
+                      "description": "统一费率",
+                      "length": 2,
+                      "analyticalType": "BYTE",
+                      "noteType": "FIELD",
+                      "byteOrdering": "LITTLE_END",
+                      "defaultValue": 0,
+                      "protocolDataType": "BYTE",
+                      "businessDataType": "INT"
+                    }
+                  }
+                },
+                "2": {
+                  "description": "按时间收费",
+                  "firstNode": "unitServiceRate",
+                  "ruleLink": {
+                    "unitServiceRate": {
+                      "description": "统一费率",
+                      "length": 2,
+                      "analyticalType": "BYTE",
+                      "noteType": "FIELD",
+                      "byteOrdering": "LITTLE_END",
+                      "defaultValue": 0,
+                      "protocolDataType": "BYTE",
+                      "businessDataType": "INT"
+                    }
+                  }
+                },
+                "3": {
+                  "description": "按电量收费",
+                  "firstNode": "unitServiceRate",
+                  "ruleLink": {
+                    "unitServiceRate": {
+                      "description": "统一费率",
+                      "length": 2,
+                      "analyticalType": "BYTE",
+                      "noteType": "FIELD",
+                      "byteOrdering": "LITTLE_END",
+                      "defaultValue": 0,
+                      "protocolDataType": "BYTE",
+                      "businessDataType": "INT"
+                    }
+                  }
+                },
+                "4": {
+                  "description": "按充电次数收费",
+                  "firstNode": "unitServiceRate",
+                  "ruleLink": {
+                    "unitServiceRate": {
+                      "description": "统一费率",
+                      "length": 2,
+                      "analyticalType": "BYTE",
+                      "noteType": "FIELD",
+                      "byteOrdering": "LITTLE_END",
+                      "defaultValue": 0,
+                      "protocolDataType": "BYTE",
+                      "businessDataType": "INT"
+                    }
+                  }
+                },
+                "1": {
+                  "description": "按尖峰平谷电价收费",
+                  "firstNode": "serviceRateCount",
+                  "ruleLink": {
+                    "serviceRateCount": {
+                      "description": "时段数",
+                      "length": 1,
+                      "analyticalType": "BYTE",
+                      "noteType": "FIELD",
+                      "byteOrdering": "LITTLE_END",
+                      "defaultValue": 0,
+                      "protocolDataType": "BYTE",
+                      "businessDataType": "INT",
+                      "nextNodeName": "serviceRateList"
+                    },
+                    "serviceRateList": {
+                      "description": "分时段计费信息",
+                      "analyticalType": "BYTE",
+                      "noteType": "LIST",
+                      "sourceFieldName": "serviceRateCount",
+                      "itemJson": {
+                        "firstNode": "timeName",
+                        "ruleLink": {
+                          "timeName": {
+                            "description": "时段名称",
+                            "length": 1,
+                            "analyticalType": "BYTE",
+                            "noteType": "FIELD",
+                            "byteOrdering": "LITTLE_END",
+                            "defaultValue": 0,
+                            "protocolDataType": "BYTE",
+                            "businessDataType": "INT",
+                            "nextNodeName": "startTime"
+                          },
+                          "startTime": {
+                            "description": "起始时间",
+                            "length": 1,
+                            "analyticalType": "BYTE",
+                            "noteType": "FIELD",
+                            "byteOrdering": "LITTLE_END",
+                            "defaultValue": 0,
+                            "protocolDataType": "BYTE",
+                            "businessDataType": "INT",
+                            "nextNodeName": "stopTime"
+                          },
+                          "stopTime": {
+                            "description": "结束时间",
+                            "length": 1,
+                            "analyticalType": "BYTE",
+                            "noteType": "FIELD",
+                            "byteOrdering": "LITTLE_END",
+                            "defaultValue": 0,
+                            "protocolDataType": "BYTE",
+                            "businessDataType": "INT",
+                            "nextNodeName": "rate"
+                          },
+                          "rate": {
+                            "description": "时段费率",
+                            "length": 2,
+                            "analyticalType": "BYTE",
+                            "noteType": "FIELD",
+                            "byteOrdering": "LITTLE_END",
+                            "defaultValue": 0,
+                            "protocolDataType": "BYTE",
+                            "businessDataType": "INT"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "0D": {
+          "description": "事件通知",
+          "firstNode": "resultCode",
+          "ruleLink": {
+            "resultCode": {
+              "description": "结果",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "connectorId"
+            },
+            "connectorId": {
+              "description": "充电枪口",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "eventCode"
+            },
+            "eventCode": {
+              "description": "事件代码",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "firstParam"
+            },
+            "firstParam": {
+              "description": "参数1",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "secondParam"
+            },
+            "secondParam": {
+              "description": "参数2",
+              "length": 4,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "eventStatus"
+            },
+            "eventStatus": {
+              "description": "事件状态",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "eventLevel"
+            },
+            "eventLevel": {
+              "description": "事件等级",
+              "length": 1,
+              "analyticalType": "BYTE",
+              "noteType": "FIELD",
+              "byteOrdering": "LITTLE_END",
+              "defaultValue": 0,
+              "protocolDataType": "BYTE",
+              "businessDataType": "INT",
+              "nextNodeName": "eventDes"
+            }
+          }
+        }
+      }
+    },
+    "check": {
+      "description": "CRC校验",
+      "length": 1,
+      "analyticalType": "BYTE",
+      "noteType": "CHECK",
+      "checkType": "SUM",
+      "startCheckIndex": 13,
+      "endCheckIndex": -1,
+      "checkIndex": -1
+    }
+  }
+}
